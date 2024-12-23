@@ -11,7 +11,7 @@ const people = [
 
     pets: [
       {
-        specie: "cat",
+        specie: "dog",
         name: "Max",
         age: 4,
         isFullyVaccinated: true,
@@ -104,34 +104,31 @@ const people = [
   },
 ];
 
-const employeesCount = function (people) {
-  return people.filter((person) => person.employed).length;
-};
+const employeesCount = (people) =>
+  people.filter((person) => person.employed).length;
 
 console.log("1. How many individuals are currently employed?");
 console.log(employeesCount(people));
 
-const noOfPeopleWhoHasCar = function (people) {
-  return people.filter((person) => person.transportation.includes("car"))
-    .length;
-};
+const noOfPeopleWhoHasCar = (people) =>
+  people.filter((person) => person.transportation.includes("car")).length;
 
 console.log("2. How many people own a car?");
 console.log(noOfPeopleWhoHasCar(people));
 
-const countOfVaccinatedPets = function (people) {
-  return people
-    .flatMap((person) => person.pets)
-    .filter((pet) => pet.isFullyVaccinated).length;
-};
+const countOfVaccinatedPets = (people) =>
+  people.flatMap((person) => person.pets).filter((pet) => pet.isFullyVaccinated)
+    .length;
 
 console.log("3. How many pets are fully vaccinated?");
 console.log(countOfVaccinatedPets(people));
 
-const petNames = function (people) {
-  return people.flatMap((person) => person.pets);
-};
+const petNamesAndSpecie = (people) =>
+  people
+    .flatMap((person) => person.pets)
+    .map((pet) => ({ name: pet.name, specie: pet.specie }));
 
 console.log(
   "4. What are the names of all the pets, and what type of animal is each?"
 );
+console.log(petNamesAndSpecie(people));

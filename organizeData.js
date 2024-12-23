@@ -107,34 +107,35 @@ const people = [
 const employeesCount = (people) =>
   people.filter((person) => person.employed).length;
 
-console.log("1. How many individuals are currently employed?");
-console.log(employeesCount(people));
-
 const noOfPeopleWhoHasCar = (people) =>
   people.filter((person) => person.transportation.includes("car")).length;
-
-console.log("2. How many people own a car?");
-console.log(noOfPeopleWhoHasCar(people));
 
 const countOfVaccinatedPets = (people) =>
   people.flatMap((person) => person.pets).filter((pet) => pet.isFullyVaccinated)
     .length;
-
-console.log("3. How many pets are fully vaccinated?");
-console.log(countOfVaccinatedPets(people));
 
 const petNamesAndSpecie = (people) =>
   people
     .flatMap((person) => person.pets)
     .map((pet) => ({ name: pet.name, specie: pet.specie }));
 
-console.log(
-  "4. What are the names of all the pets, and what type of animal is each?"
-);
-console.log(petNamesAndSpecie(people));
-
 const citiesOfPeople = (people) =>
   people.map((person) => ({ name: person.name, city: person.city }));
 
-console.log("5. Which cities do the individuals live in?");
-console.log(citiesOfPeople(people));
+const testExecuter = function (qnAndFn) {
+  return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
+};
+
+const testCases = [
+  ["1. How many individuals are currently employed?", employeesCount],
+  ["2. How many people own a car?", noOfPeopleWhoHasCar],
+  ["3. How many pets are fully vaccinated?", countOfVaccinatedPets],
+
+  [
+    "4. What are the names of all the pets, and what type of animal is each?",
+    petNamesAndSpecie,
+  ],
+  ["5. Which cities do the individuals live in?", citiesOfPeople],
+];
+
+console.log(testExecuter(testCases));

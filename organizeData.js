@@ -128,6 +128,12 @@ const hobbiesAndHobbiesCount = function (people) {
   return { hobbiesCount: allHobbies.length, hobbies: allHobbies };
 };
 
+const noOfPetsBelongToUnemployed = function (people) {
+  return people
+    .filter((person) => !person.employed)
+    .map((person) => person.pets).length;
+};
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -145,6 +151,10 @@ const testCases = [
   [
     "6. How many hobbies are shared across the group? What are they?",
     hobbiesAndHobbiesCount,
+  ],
+  [
+    "7. How many pets belong to people who are currently unemployed?",
+    noOfPetsBelongToUnemployed,
   ],
 ];
 

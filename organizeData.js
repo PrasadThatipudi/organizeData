@@ -1,7 +1,7 @@
 const people = [
   {
     name: "Rahul",
-    age: null,
+    age: 25,
     employed: true,
     city: "Pune",
     job: "Software engineer",
@@ -35,10 +35,10 @@ const people = [
       {
         specie: "parrot",
         name: "kiwi",
-        age: null,
+        age: 1,
         isFullyVaccinated: false,
         isVaccinated: true,
-        breed: null,
+        breed: "Monk",
         favoriteActivities: ["knows over 20 phrases", "mimics her voice"],
       },
     ],
@@ -53,7 +53,7 @@ const people = [
       "reading historical fiction",
       "spends his weekends tending to his rose garden",
     ],
-    education: null,
+    education: "BA",
     transportation: [],
 
     pets: [
@@ -128,11 +128,13 @@ const hobbiesAndHobbiesCount = function (people) {
   return { hobbiesCount: allHobbies.length, hobbies: allHobbies };
 };
 
-const noOfPetsBelongToUnemployed = function (people) {
-  return people
-    .filter((person) => !person.employed)
-    .map((person) => person.pets).length;
-};
+const noOfPetsBelongToUnemployed = (people) =>
+  people.filter((person) => !person.employed).map((person) => person.pets)
+    .length;
+
+const sum = (a, b) => a + b;
+const averageAgeOfPeople = (people) =>
+  people.map((person) => person.age).reduce(sum, 0) / people.length;
 
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
@@ -155,6 +157,10 @@ const testCases = [
   [
     "7. How many pets belong to people who are currently unemployed?",
     noOfPetsBelongToUnemployed,
+  ],
+  [
+    "8. What is the average age of the individuals mentioned in the passage?",
+    averageAgeOfPeople,
   ],
 ];
 

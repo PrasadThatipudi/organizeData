@@ -136,6 +136,11 @@ const sum = (a, b) => a + b;
 const averageAgeOfPeople = (people) =>
   people.map((person) => person.age).reduce(sum, 0) / people.length;
 
+const studiedCSAndHavingPets = (people) =>
+  people
+    .filter((person) => person.education === "computer science")
+    .filter((person) => person.pets).length;
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -161,6 +166,10 @@ const testCases = [
   [
     "8. What is the average age of the individuals mentioned in the passage?",
     averageAgeOfPeople,
+  ],
+  [
+    "9. How many individuals have studied computer science, and how many of them have pets?",
+    studiedCSAndHavingPets,
   ],
 ];
 

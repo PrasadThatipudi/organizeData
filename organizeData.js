@@ -141,6 +141,9 @@ const studiedCSAndHavingPets = (people) =>
     .filter((person) => person.education === "computer science")
     .filter((person) => person.pets).length;
 
+const noOfPeopleHasMoreThan1Pet = (people) =>
+  people.filter((person) => person.pets.length > 1).length;
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -170,6 +173,10 @@ const testCases = [
   [
     "9. How many individuals have studied computer science, and how many of them have pets?",
     studiedCSAndHavingPets,
+  ],
+  [
+    "10. How many individuals own more than one pet?",
+    noOfPeopleHasMoreThan1Pet,
   ],
 ];
 

@@ -122,6 +122,12 @@ const petNamesAndSpecie = (people) =>
 const citiesOfPeople = (people) =>
   people.map((person) => ({ name: person.name, city: person.city }));
 
+const hobbiesAndHobbiesCount = function (people) {
+  const allHobbies = people.flatMap((person) => person.hobbies);
+
+  return { hobbiesCount: allHobbies.length, hobbies: allHobbies };
+};
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -136,6 +142,10 @@ const testCases = [
     petNamesAndSpecie,
   ],
   ["5. Which cities do the individuals live in?", citiesOfPeople],
+  [
+    "6. How many hobbies are shared across the group? What are they?",
+    hobbiesAndHobbiesCount,
+  ],
 ];
 
 console.log(testExecuter(testCases));

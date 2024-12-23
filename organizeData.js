@@ -2,16 +2,16 @@ const people = [
   {
     name: "Rahul",
     age: 25,
-    employed: true,
+    employement: { status: true, job: "Software engineer" },
     city: "Pune",
-    job: "Software engineer",
+    // hobbies: { games: ["chess"], gardening: ["gardening"] },
     hobbies: ["playing chess", "gardening"],
     education: "computer science",
     transportation: ["car"],
 
     pets: [
       {
-        specie: "dog",
+        species: "dog",
         name: "Max",
         age: 4,
         isFullyVaccinated: true,
@@ -23,17 +23,17 @@ const people = [
   },
   {
     name: "Ananya",
-    employed: true,
+    employement: { status: true, job: "graphic designer" },
     city: "Bangalore",
     age: 30,
-    job: "graphic designer",
+    // hobbies: { cooking: ["often experiments with Italian recipes"] },
     hobbies: ["cooking", "often experiments with Italian recipes"],
     education: "computer science",
     transportation: ["public transport"],
 
     pets: [
       {
-        specie: "parrot",
+        species: "parrot",
         name: "kiwi",
         age: 1,
         isFullyVaccinated: false,
@@ -45,10 +45,13 @@ const people = [
   },
   {
     name: "Ramesh",
-    employed: true,
+    employement: { status: true, job: "business owner" },
     city: "Jaipur",
     age: 45,
-    job: "business owner",
+    // hobbies: {
+    //   reading: ["historical fiction"],
+    //   gardening: ["spends his weekends tending to his rose garden"],
+    // },
     hobbies: [
       "reading historical fiction",
       "spends his weekends tending to his rose garden",
@@ -58,20 +61,20 @@ const people = [
 
     pets: [
       {
-        specie: "cat",
+        species: "cat",
         name: "Bella",
         age: 3,
         isFullyVaccinated: true,
-        isVaccinated: false,
+        isVaccinated: true,
         breed: "percian",
         favoriteActivities: ["love lounging in the sun"],
       },
       {
-        specie: "cat",
+        species: "cat",
         name: "Leo",
         age: 3,
         isFullyVaccinated: true,
-        isVaccinated: false,
+        isVaccinated: true,
         breed: "percian",
         favoriteActivities: ["love lounging in the sun"],
       },
@@ -79,17 +82,20 @@ const people = [
   },
   {
     name: "Kavya",
-    employed: false,
+    employement: { status: false, job: "professional dancer" },
     city: "Chennai",
     age: 28,
-    job: "professional dancer",
+    // hobbies: {
+    //   reading: ["prefers modern fantasy novels"],
+    //   watching: ["binge-watching sci-fi shows"],
+    // },
     hobbies: ["prefers modern fantasy novels ", " binge-watching sci-fi shows"],
     education: null,
     transportation: [],
 
     pets: [
       {
-        specie: "rabbit",
+        species: "rabbit",
         name: "Snowy",
         age: 2,
         isFullyVaccinated: false,
@@ -105,7 +111,7 @@ const people = [
 ];
 
 const employeesCount = (people) =>
-  people.filter((person) => person.employed).length;
+  people.filter((person) => person.employement.status).length;
 
 const noOfPeopleWhoHasCar = (people) =>
   people.filter((person) => person.transportation.includes("car")).length;
@@ -114,10 +120,10 @@ const countOfVaccinatedPets = (people) =>
   people.flatMap((person) => person.pets).filter((pet) => pet.isFullyVaccinated)
     .length;
 
-const petNamesAndSpecie = (people) =>
+const petNamesAndspecies = (people) =>
   people
     .flatMap((person) => person.pets)
-    .map((pet) => ({ name: pet.name, specie: pet.specie }));
+    .map((pet) => ({ name: pet.name, species: pet.species }));
 
 const citiesOfPeople = (people) =>
   people.map((person) => ({ name: person.name, city: person.city }));
@@ -129,8 +135,9 @@ const hobbiesAndHobbiesCount = function (people) {
 };
 
 const noOfPetsBelongToUnemployed = (people) =>
-  people.filter((person) => !person.employed).map((person) => person.pets)
-    .length;
+  people
+    .filter((person) => !person.employement.status)
+    .map((person) => person.pets).length;
 
 const sum = (a, b) => a + b;
 const averageAgeOfPeople = (people) =>
@@ -144,6 +151,60 @@ const studiedCSAndHavingPets = (people) =>
 const noOfPeopleHasMoreThan1Pet = (people) =>
   people.filter((person) => person.pets.length > 1).length;
 
+const petsAssociatedWithFavActivities = (people) =>
+  people
+    .flatMap((person) => person.pets)
+    .filter((pet) => pet.favoriteActivities.length !== 0)
+    .map((pet) => ({
+      species: pet.species,
+      name: pet.name,
+      favoriteActivities: pet.favoriteActivities,
+    }));
+
+const petsNamesBelongToBangaloreAndChennai = (people) =>
+  people
+    .filter(
+      (person) => person.city === "Chennai" || person.city === "Bangalore"
+    )
+    .flatMap((person) => person.pets)
+    .map((pet) => pet.name);
+
+const vaccinatedPetsBelongToNoCar = (people) =>
+  people
+    .filter((person) => person.transportation.includes("car"))
+    .flatMap((person) => person.pets)
+    .filter((pet) => pet.isFullyVaccinated).length;
+
+const countOccurences = function (occurences, element) {
+  !occurences[element] ? (occurences[element] = 1) : (occurences[element] += 1);
+  return occurences;
+};
+
+const commonTypeOfPet = function (people) {
+  const petOccurences = people
+    .flatMap((person) => person.pets)
+    .map((pet) => pet.species)
+    .reduce(countOccurences, {});
+
+  return Object.keys(petOccurences).reduce((commonPet, pet) =>
+    petOccurences[commonPet] > petOccurences[pet] ? commonPet : pet
+  );
+};
+
+const moreThanTwoHobbies = (people) =>
+  people.filter((person) => person.hobbies.length > 2).length;
+
+const youngestPet = function (people) {
+  const youngPet = people
+    .flatMap((person) => person.pets)
+    .reduce((youngPet, pet) => (youngPet.age > pet.age ? pet : youngPet));
+
+  return { youngestPet: youngPet.species, name: youngPet.name };
+};
+
+const cityStatrsWithB = (people) =>
+  people.filter((person) => person.city.startsWith("B")).length;
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -152,10 +213,9 @@ const testCases = [
   ["1. How many individuals are currently employed?", employeesCount],
   ["2. How many people own a car?", noOfPeopleWhoHasCar],
   ["3. How many pets are fully vaccinated?", countOfVaccinatedPets],
-
   [
     "4. What are the names of all the pets, and what type of animal is each?",
-    petNamesAndSpecie,
+    petNamesAndspecies,
   ],
   ["5. Which cities do the individuals live in?", citiesOfPeople],
   [
@@ -177,6 +237,25 @@ const testCases = [
   [
     "10. How many individuals own more than one pet?",
     noOfPeopleHasMoreThan1Pet,
+  ],
+  [
+    "11. Which pets are associated with specific favorite activities?",
+    petsAssociatedWithFavActivities,
+  ],
+  [
+    "12. What are the names of all animals that belong to people who live in Bangalore or Chennai?",
+    petsNamesBelongToBangaloreAndChennai,
+  ],
+  [
+    "13. How many vaccinated pets belong to people who do not own a car?",
+    vaccinatedPetsBelongToNoCar,
+  ],
+  ["14. What is the most common type of pet among the group?", commonTypeOfPet],
+  ["15. How many individuals have more than two hobbies?", moreThanTwoHobbies],
+  ["17. Which pet is the youngest, and what is its name?", youngestPet],
+  [
+    "19. How many individuals live in cities starting with the letter B?",
+    cityStatrsWithB,
   ],
 ];
 

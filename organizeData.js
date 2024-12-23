@@ -4,8 +4,12 @@ const people = [
     age: 25,
     employement: { status: true, job: "Software engineer" },
     city: "Pune",
+    hobbies: [
+      { hobby: "chess", description: null },
+      { hobby: "gardening", description: null },
+    ],
     // hobbies: { games: ["chess"], gardening: ["gardening"] },
-    hobbies: ["playing chess", "gardening"],
+    // hobbies: ["playing chess", "gardening"],
     education: "computer science",
     transportation: ["car"],
 
@@ -26,8 +30,14 @@ const people = [
     employement: { status: true, job: "graphic designer" },
     city: "Bangalore",
     age: 30,
+    hobbies: [
+      {
+        hobby: "cooking",
+        description: "often experiments with Italian recipes",
+      },
+    ],
     // hobbies: { cooking: ["often experiments with Italian recipes"] },
-    hobbies: ["cooking", "often experiments with Italian recipes"],
+    // hobbies: ["cooking", "often experiments with Italian recipes"],
     education: "computer science",
     transportation: ["public transport"],
 
@@ -48,14 +58,21 @@ const people = [
     employement: { status: true, job: "business owner" },
     city: "Jaipur",
     age: 45,
+    hobbies: [
+      { hobby: "reading", description: "historical fiction" },
+      {
+        hobby: "gardening",
+        description: "spends his weekends tending to his rose garden",
+      },
+    ],
     // hobbies: {
     //   reading: ["historical fiction"],
     //   gardening: ["spends his weekends tending to his rose garden"],
     // },
-    hobbies: [
-      "reading historical fiction",
-      "spends his weekends tending to his rose garden",
-    ],
+    // hobbies: [
+    //   "reading historical fiction",
+    //   "spends his weekends tending to his rose garden",
+    // ],
     education: "BA",
     transportation: [],
 
@@ -85,6 +102,13 @@ const people = [
     employement: { status: false, job: "professional dancer" },
     city: "Chennai",
     age: 28,
+    hobbies: [
+      { hobby: "reading", description: "prefers modern fantasy novels" },
+      {
+        hobby: "watching",
+        description: "binge-watching sci-fi shows",
+      },
+    ],
     // hobbies: {
     //   reading: ["prefers modern fantasy novels"],
     //   watching: ["binge-watching sci-fi shows"],

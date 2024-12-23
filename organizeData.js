@@ -3,7 +3,7 @@ const people = [
     name: "Rahul",
     age: null,
     employed: true,
-    place: "Pune",
+    city: "Pune",
     job: "Software engineer",
     hobbies: ["playing chess", "gardening"],
     education: "computer science",
@@ -24,7 +24,7 @@ const people = [
   {
     name: "Ananya",
     employed: true,
-    place: "Bangalore",
+    city: "Bangalore",
     age: 30,
     job: "graphic designer",
     hobbies: ["cooking", "often experiments with Italian recipes"],
@@ -46,7 +46,7 @@ const people = [
   {
     name: "Ramesh",
     employed: true,
-    place: "Jaipur",
+    city: "Jaipur",
     age: 45,
     job: "business owner",
     hobbies: [
@@ -80,7 +80,7 @@ const people = [
   {
     name: "Kavya",
     employed: false,
-    place: "Chennai",
+    city: "Chennai",
     age: 28,
     job: "professional dancer",
     hobbies: ["prefers modern fantasy novels ", " binge-watching sci-fi shows"],
@@ -132,3 +132,9 @@ console.log(
   "4. What are the names of all the pets, and what type of animal is each?"
 );
 console.log(petNamesAndSpecie(people));
+
+const citiesOfPeople = (people) =>
+  people.map((person) => ({ name: person.name, city: person.city }));
+
+console.log("5. Which cities do the individuals live in?");
+console.log(citiesOfPeople(people));

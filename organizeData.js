@@ -5,8 +5,8 @@ const people = [
     employement: { status: true, job: "Software engineer" },
     city: "Pune",
     hobbies: [
-      { hobby: "chess", description: null },
-      { hobby: "gardening", description: null },
+      { hobby: "games", description: ["chess"] },
+      { hobby: "gardening", description: [] },
     ],
     // hobbies: { games: ["chess"], gardening: ["gardening"] },
     // hobbies: ["playing chess", "gardening"],
@@ -33,7 +33,7 @@ const people = [
     hobbies: [
       {
         hobby: "cooking",
-        description: "often experiments with Italian recipes",
+        description: ["often experiments with Italian recipes"],
       },
     ],
     // hobbies: { cooking: ["often experiments with Italian recipes"] },
@@ -59,10 +59,10 @@ const people = [
     city: "Jaipur",
     age: 45,
     hobbies: [
-      { hobby: "reading", description: "historical fiction" },
+      { hobby: "reading books", description: ["historical fiction"] },
       {
         hobby: "gardening",
-        description: "spends his weekends tending to his rose garden",
+        description: ["spends his weekends tending to his rose garden"],
       },
     ],
     // hobbies: {
@@ -103,17 +103,17 @@ const people = [
     city: "Chennai",
     age: 28,
     hobbies: [
-      { hobby: "reading", description: "prefers modern fantasy novels" },
+      { hobby: "reading", description: ["prefers modern fantasy novels"] },
       {
         hobby: "watching",
-        description: "binge-watching sci-fi shows",
+        description: ["binge-watching sci-fi shows"],
       },
     ],
     // hobbies: {
     //   reading: ["prefers modern fantasy novels"],
     //   watching: ["binge-watching sci-fi shows"],
     // },
-    hobbies: ["prefers modern fantasy novels ", " binge-watching sci-fi shows"],
+    // hobbies: ["prefers modern fantasy novels ", " binge-watching sci-fi shows"],
     education: null,
     transportation: [],
 
@@ -147,10 +147,10 @@ const countOfVaccinatedPets = (people) =>
 const petNamesAndspecies = (people) =>
   people
     .flatMap((person) => person.pets)
-    .map((pet) => ({ name: pet.name, species: pet.species }));
+    .map(({ name, species }) => ({ name, species }));
 
 const citiesOfPeople = (people) =>
-  people.map((person) => ({ name: person.name, city: person.city }));
+  people.map(({ name, city }) => ({ name, city }));
 
 const hobbiesAndHobbiesCount = function (people) {
   const allHobbies = people.flatMap((person) => person.hobbies);
@@ -179,10 +179,10 @@ const petsAssociatedWithFavActivities = (people) =>
   people
     .flatMap((person) => person.pets)
     .filter((pet) => pet.favoriteActivities.length !== 0)
-    .map((pet) => ({
-      species: pet.species,
-      name: pet.name,
-      favoriteActivities: pet.favoriteActivities,
+    .map(({ species, name, favoriteActivities }) => ({
+      species,
+      name,
+      favoriteActivities,
     }));
 
 const petsNamesBelongToBangaloreAndChennai = (people) =>
@@ -219,11 +219,11 @@ const moreThanTwoHobbies = (people) =>
   people.filter((person) => person.hobbies.length > 2).length;
 
 const youngestPet = function (people) {
-  const youngPet = people
+  const { species: youngestPet, name } = people
     .flatMap((person) => person.pets)
     .reduce((youngPet, pet) => (youngPet.age > pet.age ? pet : youngPet));
 
-  return { youngestPet: youngPet.species, name: youngPet.name };
+  return { youngestPet, name };
 };
 
 const cityStatrsWithB = (people) =>
@@ -277,6 +277,10 @@ const testCases = [
   ["14. What is the most common type of pet among the group?", commonTypeOfPet],
   ["15. How many individuals have more than two hobbies?", moreThanTwoHobbies],
   ["17. Which pet is the youngest, and what is its name?", youngestPet],
+  // [
+  //   "18. What types of books are mentioned as interests, and who reads them?",
+  //   whoReadsBooksAndWhatAreThey,
+  // ],
   [
     "19. How many individuals live in cities starting with the letter B?",
     cityStatrsWithB,

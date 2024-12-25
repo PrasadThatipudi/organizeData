@@ -103,7 +103,10 @@ const people = [
     city: "Chennai",
     age: 28,
     hobbies: [
-      { hobby: "reading", description: ["prefers modern fantasy novels"] },
+      {
+        hobby: "reading books",
+        description: ["prefers modern fantasy novels"],
+      },
       {
         hobby: "watching",
         description: ["binge-watching sci-fi shows"],
@@ -140,14 +143,13 @@ const employeesCount = (people) =>
 const noOfPeopleWhoHasCar = (people) =>
   people.filter((person) => person.transportation.includes("car")).length;
 
+const allPets = (people) => people.flatMap((person) => person.pets);
+
 const countOfVaccinatedPets = (people) =>
-  people.flatMap((person) => person.pets).filter((pet) => pet.isFullyVaccinated)
-    .length;
+  allPets(people).filter((pet) => pet.isFullyVaccinated).length;
 
 const petNamesAndspecies = (people) =>
-  people
-    .flatMap((person) => person.pets)
-    .map(({ name, species }) => ({ name, species }));
+  allPets(people).map(({ name, species }) => ({ name, species }));
 
 const citiesOfPeople = (people) =>
   people.map(({ name, city }) => ({ name, city }));
@@ -229,6 +231,17 @@ const youngestPet = function (people) {
 const cityStatrsWithB = (people) =>
   people.filter((person) => person.city.startsWith("B")).length;
 
+const whoReadsBooksAndWhatAreThey = (people) =>
+  people
+    .filter(({ hobbies }) =>
+      hobbies.some(({ hobby }) => hobby === "reading books")
+    )
+    .map(({ hobbies, name }) => ({
+      name,
+      bookPreferences: hobbies.find(({ hobby }) => hobby === "reading books")
+        .description,
+    }));
+
 const testExecuter = function (qnAndFn) {
   return qnAndFn.map(([Qn, Fn]) => ({ Qn: Qn, Ans: Fn(people) }));
 };
@@ -277,10 +290,10 @@ const testCases = [
   ["14. What is the most common type of pet among the group?", commonTypeOfPet],
   ["15. How many individuals have more than two hobbies?", moreThanTwoHobbies],
   ["17. Which pet is the youngest, and what is its name?", youngestPet],
-  // [
-  //   "18. What types of books are mentioned as interests, and who reads them?",
-  //   whoReadsBooksAndWhatAreThey,
-  // ],
+  [
+    "18. What types of books are mentioned as interests, and who reads them?",
+    whoReadsBooksAndWhatAreThey,
+  ],
   [
     "19. How many individuals live in cities starting with the letter B?",
     cityStatrsWithB,
